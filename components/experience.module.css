@@ -1,0 +1,29 @@
+.container{
+    height: 100vh;
+    width: 100%;
+    cursor: pointer;
+}
+
+.scene {
+    background-color: blue;
+    background-color: black;
+
+}
+
+.wireframe-toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #007bff; /* Button color */
+    color: #fff; /* Text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Optional: Add hover effect */
+  .wireframe-toggle  {
+    background-color: #0056b3;
+  }
