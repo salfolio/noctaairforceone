@@ -1,5 +1,5 @@
 "use client";
-import { React } from "react";
+import { React, useEffect } from "react";
 import { Canvas } from "react-three-fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import styles from "./experience.module.css";
@@ -8,13 +8,20 @@ import { useState } from "react";
 
 export default function Experience() {
   const [isWireFrame, setisWireFrame] = useState(false);
+  const [lightIntensity, setLightIntensity] = useState(0.5);
+
+  useEffect(() => {
+    // Update light intensity based on isWireFrame state
+    setLightIntensity(isWireFrame ? 10 : 1);
+  }, [isWireFrame]);
+
 
   const canvasStyle = {
-    backgroundColor: isWireFrame ? "blue" : "black",
+    backgroundColor: isWireFrame ? "black" : "#ACCCD7",
   };
 
   const gridPatternStyle = {
-    backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px)",
+    backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg,rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
     backgroundSize: "100px 100px",
   };
 
@@ -22,13 +29,12 @@ export default function Experience() {
     <div className={styles["container"]}>
       <Canvas className={styles["scene"]} style={{...canvasStyle, ...gridPatternStyle}}>
         <Product isWireFrame={isWireFrame}/>
-        <OrbitControls />
-        <ambientLight intensity={1}/>
-        <pointLight intensity={1} position={[0,5,0]}/>
+        <OrbitControls enablePan={false} maxZoom={0.5} />
+        <ambientLight intensity={lightIntensity}/>
+        <pointLight intensity={lightIntensity} position={[0,5,0]}/>
         <directionalLight intensity={1} position={[0,2,0]}/>
         <directionalLight intensity={1} position={[0,-5,0]}/>
-
-
+        <perspectiveCamera fov={100} position={[1,1,1]}/>
       </Canvas>
       <div className={styles["wireframe-toggle"]}>
         <div onClick={() => setisWireFrame(false)}>
