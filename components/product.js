@@ -53,14 +53,11 @@ export default function Product(props) {
               // Apply a different material to each child
               material = new THREE.MeshStandardMaterial({
                 map: originalMaterial.map, // Apply the texture map
-                
+
                 // wireframe: true
               });
               material.wireframe = props.isWireFrame;
-            }
-            
-            
-            else if (
+            } else if (
               child.name === "LacesAttachmentRight" ||
               child.name === "LacesAttachmentLeft"
             ) {
@@ -110,7 +107,6 @@ export default function Product(props) {
               material = new THREE.MeshStandardMaterial();
               material.wireframe = props.isWireFrame;
               material.side = THREE.DoubleSide;
-
             }
 
             return (
@@ -118,7 +114,7 @@ export default function Product(props) {
                 key={index}
                 geometry={child.geometry}
                 material={material}
-                scale={8}
+                scale={1}
               />
             );
           }
