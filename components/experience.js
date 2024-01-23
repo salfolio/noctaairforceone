@@ -35,17 +35,21 @@ export default function Experience() {
       className={styles["container"]}
       style={{ ...canvasStyle, ...gridPatternStyle }}
     >
-      
       <Canvas className={styles["canvas"]} style={{ ...canvasSizeStyle }}>
         <Product isWireFrame={isWireFrame} />
-        <OrbitControls enablePan={false} maxZoom={0.5} target={[0, 0, 0]} />
+        <OrbitControls
+          enablePan={false}
+          target={[0, 0, 0]}
+          minDistance={0.8} // Set the minimum distance for zoom
+          maxDistance={1.5} // Set the maximum distance for zoom
+        />
         <ambientLight intensity={lightIntensity} />
         <pointLight intensity={lightIntensity} position={[0, 5, 0]} />
         <directionalLight intensity={1} position={[0, 2, 0]} />
         <directionalLight intensity={1} position={[0, -5, 0]} />
         <PerspectiveCamera
           makeDefault
-          fov={20}
+          fov={25}
           near={0.1}
           far={1000}
           position={[0, 0, 1]}
