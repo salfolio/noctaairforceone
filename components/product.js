@@ -1,12 +1,15 @@
 import React from "react";
 import { useRef } from "react";
 import { useFrame } from "react-three-fiber";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three"; // Import THREE
+
 
 export default function Product(props) {
   const meshRef = useRef();
-  const model = useGLTF("./model/NoctaForceOnes4.glb");
+  const model = useGLTF("./model/NoctaForceOnes8-stitches-002.glb");
+  const model2 = useGLTF("./model/NoctaForceOnes8-stitches-002.glb");
+  
   console.log(model);
 
   // useFrame is a hook that runs on each frame
@@ -15,20 +18,36 @@ export default function Product(props) {
     meshRef.current.rotation.y -= 0.004;
   });
 
+
+  const lacesTextures = useTexture("./textures/LacesBaked001.jpg");
+  const bodyTextures = useTexture("./textures/ShoesBaked004.jpg");
+  const interorTextures = useTexture("./textures/InteriorSole001.jpg");
+
+  bodyTextures.flipY = false
+  lacesTextures.flipY = false
+  interorTextures.flipY = false
+
+
+
   return (
     <>
       <group ref={meshRef}>
+        {/* <primitive object={model2.scene}/> */}
         {model.scene.children.map((child, index) => {
           if (child.isMesh) {
             // Apply a different material to each child
             let material;
-
             // Customize material properties based on your requirements
             if (child.name === "BodyLeft" || child.name === "BodyRight") {
-              // Example: Apply a standard material with a specific color to the sole
-              material = new THREE.MeshStandardMaterial({ color: "white" }); // Adjust color as needed
-              material.side = THREE.DoubleSide;
-              material.wireframe = props.isWireFrame;
+              const originalMaterial = child.material;
+
+              material = new THREE.MeshStandardMaterial({
+                side: THREE.DoubleSide,
+                wireframe: props.isWireFrame,
+
+              }); // Adjust color as needed
+
+              
               // material.wireframe = true
             } else if (
               child.name === "LacesLeft" ||
@@ -38,8 +57,7 @@ export default function Product(props) {
 
               // Apply a different material to each child
               material = new THREE.MeshStandardMaterial({
-                color: "white", // Adjust color as needed
-                // map: originalMaterial.map, // Apply the texture map
+                map: lacesTextures, // Apply the texture map
                 // wireframe: true
               });
               material.wireframe = props.isWireFrame;
@@ -47,12 +65,10 @@ export default function Product(props) {
               child.name === "InnerSoleRight" ||
               child.name === "InnerSoleLeft"
             ) {
-              // Access the material directly from the child
-              const originalMaterial = child.material;
 
               // Apply a different material to each child
               material = new THREE.MeshStandardMaterial({
-                map: originalMaterial.map, // Apply the texture map
+                map: interorTextures, // Apply the texture map
 
                 // wireframe: true
               });
@@ -67,7 +83,7 @@ export default function Product(props) {
               // Apply a different material to each child
               material = new THREE.MeshStandardMaterial({
                 color: "white", // Adjust color as needed
-                metalness: "0.8",
+                metalness: "0.6",
                 roughness: "0.2",
                 // wireframe: true
               });

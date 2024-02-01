@@ -1,10 +1,16 @@
 "use client";
 import { React, useEffect } from "react";
 import { Canvas } from "react-three-fiber";
-import { Html, OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import {
+  Html,
+  OrbitControls,
+  PerspectiveCamera,
+  Environment,
+} from "@react-three/drei";
 import styles from "./experience.module.css";
 import Product from "./product";
 import { useState } from "react";
+import Shoes from "./shoes";
 
 export default function Experience() {
   const [isWireFrame, setisWireFrame] = useState(false);
@@ -20,8 +26,8 @@ export default function Experience() {
   };
 
   const canvasSizeStyle = {
-    width: "100%", // Adjust the width as needed
-    height: "600px", // Adjust the height as needed
+    // width: "100%", // Adjust the width as needed
+    // height: "600px", // Adjust the height as needed
   };
 
   const gridPatternStyle = {
@@ -36,17 +42,18 @@ export default function Experience() {
       style={{ ...canvasStyle, ...gridPatternStyle }}
     >
       <Canvas className={styles["canvas"]} style={{ ...canvasSizeStyle }}>
-        <Product isWireFrame={isWireFrame} />
+        {/* <Product isWireFrame={isWireFrame} /> */}
+        <Shoes isWireFrame={isWireFrame} />
         <OrbitControls
           enablePan={false}
           target={[0, 0, 0]}
-          minDistance={0.8} // Set the minimum distance for zoom
+          minDistance={0.1} // Set the minimum distance for zoom
           maxDistance={1.5} // Set the maximum distance for zoom
         />
         <ambientLight intensity={lightIntensity} />
-        <pointLight intensity={lightIntensity} position={[0, 5, 0]} />
-        <directionalLight intensity={1} position={[0, 2, 0]} />
-        <directionalLight intensity={1} position={[0, -5, 0]} />
+        <pointLight intensity={lightIntensity} position={[0, 5, 0]} /> 
+        <directionalLight intensity={4} position={[10, 2, 0]} />
+        <directionalLight intensity={4} position={[0, -5, 0]} />
         <PerspectiveCamera
           makeDefault
           fov={25}
@@ -54,6 +61,7 @@ export default function Experience() {
           far={1000}
           position={[0, 0, 1]}
         />
+        {/* <Environment background={false} files={"/hdri/skyHDRI.exr"}/> */}
       </Canvas>
       <div className={styles["wireframe-toggle"]}>
         <div onClick={() => setisWireFrame(false)}>
