@@ -1,7 +1,7 @@
-import Experience from '../components/experience'
+import Main from '../components/main'
 
 export default function Home() {
   return (
-    <Experience />
+    <Main/>
   )
 }
