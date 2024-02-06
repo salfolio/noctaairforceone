@@ -12,30 +12,37 @@ import Product from "./3d-components/product";
 import { useState } from "react";
 import Shoes from "./3d-components/shoes";
 import NikeBox from "./nikebox";
+import ShoeAnimation from "./3d-components/shoe-animation";
 
 export default function Experience() {
   const [isWireFrame, setisWireFrame] = useState(false);
   const [lightIntensity, setLightIntensity] = useState(0.5);
+  const [openBoxAnim, setOpenBoxAnim] = useState(false);
+  const [cameraTransformation, setCameraTransformation] = useState({
+    target: [0,0.45,0],
+    fov: 20,
+  });
 
   // Update light intensity based on isWireFrame state
   useEffect(() => {
     setLightIntensity(isWireFrame ? 10 : 1);
   }, [isWireFrame]);
 
-  const canvasStyle = {
-    backgroundColor: isWireFrame ? "black" : "#ACCCD7",
-  };
-
-  const canvasSizeStyle = {
-    // width: "100%", // Adjust the width as needed
-    // height: "600px", // Adjust the height as needed
-  };
-
-  const gridPatternStyle = {
-    backgroundImage:
-      "linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg,rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
-    backgroundSize: "100px 100px",
-  };
+  const toggleAnim = () => {
+    if(openBoxAnim === false) {
+      setOpenBoxAnim(true);
+      setCameraTransformation({
+        target: [0,0.45,0],
+        fov: [20]
+      })
+    } else if(openBoxAnim === true) {
+      setOpenBoxAnim(false);
+      setCameraTransformation({
+        target: [0,0,0],
+        fov: [25]
+      })
+    }
+  }
 
   return (
     <>     
@@ -43,14 +50,15 @@ export default function Experience() {
         className={styles["canvas"]}
         // style={{ ...canvasStyle, ...gridPatternStyle }}
       >
-        <Canvas style={{ ...canvasSizeStyle }}>
+        <Canvas>
           {/* <Product isWireFrame={isWireFrame} /> */}
-          <Shoes isWireFrame={isWireFrame} />
-          <NikeBox isWireFrame={isWireFrame} />
+          {/* <Shoes isWireFrame={isWireFrame} /> */}
+          <ShoeAnimation/>
+          <NikeBox isWireFrame={isWireFrame} shoeAnim={openBoxAnim}/>
           <OrbitControls
             enablePan={false}
             enableZoom={false}
-            target={[0, 0, 0]}
+            target={cameraTransformation.target}
             minDistance={1.3} // Set the minimum distance for zoom
             maxDistance={1.3} // Set the maximum distance for zoom
           />
@@ -60,13 +68,11 @@ export default function Experience() {
           <directionalLight intensity={4} position={[0, -5, 0]} />
           <PerspectiveCamera
             makeDefault
-            fov={25}
+            fov={cameraTransformation.fov}
             near={0.1}
             far={1000}
             position={[-4, 1, 4]}
           />
-
-          {/* <Environment background={false} files={"/hdri/skyHDRI.exr"}/> */}
         </Canvas>
         {/* <div className={styles["header"]}>
         <h1>{"The NOCTA Air Force 1"}</h1>
@@ -98,6 +104,16 @@ export default function Experience() {
           <p>On</p>
         </div>
       </div> */}
+      <div className={styles["toggle-box-button"]}>
+        <div className={styles["toggle-box-button-container"]}>
+          <div onClick={toggleAnim}>
+            {"open box"}
+          </div>
+          <div onClick={toggleAnim}>
+            {"close box"}
+          </div>
+        </div>
+      </div>
     </>
   );
 }

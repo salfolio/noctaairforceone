@@ -17,11 +17,11 @@ import BookSection from "./book-section";
 export default function main() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Experience />
-      <About />
-      <BookSection/>
-      <Heritage />
+      {/* <About /> */}
+      {/* <BookSection/> */}
+      {/* <Heritage /> */}
     </>
   );
 }

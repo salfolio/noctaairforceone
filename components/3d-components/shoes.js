@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useFrame } from "react-three-fiber";
 import { Html, useGLTF, useTexture } from "@react-three/drei";
 import * as THREE from "three"; // Import THREE
@@ -21,10 +21,55 @@ export default function Shoe(props) {
   lacesTextures.flipY = false;
   interorTextures.flipY = false;
 
-  console.log(model);
+  const initShoeTransform = {
+    shoeLeft: { position: [0.048, 0, -0.02], rotation: [0, 0, Math.PI / 2] },
+    shoeRight: {
+      position: [-0.048, 0, 0.02],
+      rotation: [0, Math.PI, Math.PI / 2],
+    },
+  };
+
+  const finalShoeTransform = {
+    shoeLeft: { position: [0.06, 0, 0], rotation: [0, 0, 0] },
+    shoeRight: { position: [-0.06, 0, 0], rotation: [0, 0, 0] },
+  };
+
+
+  const animateShoes = () => {
+    const duration = 2; // Adjust the duration of the animation in seconds
+
+    // Calculate the animation progress based on the elapsed time
+    const progress = Math.min(1, animationProgress + props.delta / duration);
+
+    // Update the position and rotation of the shoe groups based on the animation progress
+    shoeLeftRef.current.position.lerpVectors(
+      new THREE.Vector3().fromArray(initShoeTransform.shoeLeft.position),
+      new THREE.Vector3().fromArray(finalShoeTransform.shoeLeft.position),
+      progress
+    );
+    shoeLeftRef.current.rotation.lerpVectors(
+      new THREE.Euler().fromArray(initShoeTransform.shoeLeft.rotation),
+      new THREE.Euler().fromArray(finalShoeTransform.shoeLeft.rotation),
+      progress
+    );
+
+    shoeRightRef.current.position.lerpVectors(
+      new THREE.Vector3().fromArray(initShoeTransform.shoeRight.position),
+      new THREE.Vector3().fromArray(finalShoeTransform.shoeRight.position),
+      progress
+    );
+    shoeRightRef.current.rotation.lerpVectors(
+      new THREE.Euler().fromArray(initShoeTransform.shoeRight.rotation),
+      new THREE.Euler().fromArray(finalShoeTransform.shoeRight.rotation),
+      progress
+    );
+
+    setAnimationProgress(progress);
+  };
+
+
 
   const textureScale = 5;
-  // Traverse the model's scene to find and modify materials for BodyLeft and BodyRight
   shoeRight.scene.traverse((node) => {
     if (
       node.isMesh &&
@@ -209,40 +254,28 @@ export default function Shoe(props) {
     }
   });
   // useFrame is a hook that runs on each frame
-  useFrame((state, delta) => {
-    // You can adjust the amplitude and frequency to control the hovering effect
-    const amplitude = 0.01; // Adjust the amplitude of the hovering
-    const frequency = 0.5; // Adjust the frequency of the hovering
+  // useFrame((state, delta) => {
+  //   // You can adjust the amplitude and frequency to control the hovering effect
+  //   const amplitude = 0.01; // Adjust the amplitude of the hovering
+  //   const frequency = 0.5; // Adjust the frequency of the hovering
 
-    // Calculate the vertical position offset based on time
-    const yOffsetLeft = amplitude * Math.sin(state.clock.elapsedTime * frequency * 1.05);
-    const yOffsetRight = amplitude * Math.sin(state.clock.elapsedTime * frequency);
+  //   // Calculate the vertical position offset based on time
+  //   const yOffsetLeft = amplitude * Math.sin(state.clock.elapsedTime * frequency * 1.05);
+  //   const yOffsetRight = amplitude * Math.sin(state.clock.elapsedTime * frequency);
 
-
-    // Update the position of the shoe groups
-    shoeLeftRef.current.position.y = yOffsetLeft
-    shoeRightRef.current.position.y = yOffsetRight
-  });
-
-  //Position Values for in Box
-  const shoeLeftRotationBox = [0, 0, Math.PI / 2];
-  const shoeRightRotationBox = [0, Math.PI, Math.PI / 2];
-  const shoeLeftPositionBox = [0.048, 0, -0.02];
-  const shoerightPositionBox = [-0.048, 0, 0.02];
+  //   // Update the position of the shoe groups
+  //   shoeLeftRef.current.position.y = yOffsetLeft
+  //   shoeRightRef.current.position.y = yOffsetRight
+  // });
 
   return (
     <>
-      <group ref={meshRef} scale={[1.5,1.5,1.5]}>
-        <group position={[0.06, 0, 0]} ref={shoeLeftRef}>
-          {/* <Html>
-            <div className={styles["marker"]}>
-              h1
-            </div>
-          </Html> */}
+      <group ref={meshRef} scale={[1, 1, 1]}>
+        <group position={initShoeTransform.shoeLeft.position} rotation={initShoeTransform.shoeLeft.rotation} ref={shoeLeftRef}>
           <primitive object={shoeLeft.scene} />
         </group>
-        <group position={[-0.06, 0, 0]}>
-          <primitive object={shoeRight.scene} ref={shoeRightRef}/>
+        <group position={initShoeTransform.shoeRight.position} rotation={initShoeTransform.shoeRight.rotation} ref={shoeRightRef}>
+          <primitive object={shoeRight.scene} />
         </group>
       </group>
     </>

@@ -39,6 +39,24 @@
   background: linear-gradient(to bottom, #ACCCD7, #d3d3d3);
 }
 
+.toggle-box-button{
+  position: absolute;
+  display: flex;
+  width: 100%;
+  bottom: 1rem;
+  align-items: center;
+  justify-content: center;
+  bottom: 1rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.toggle-box-button-container{
+  background-color: red;
+  cursor: pointer;
+  
+}
+
 .wireframe-toggle {
   padding: 10px;
   margin-bottom: 10px;
@@ -83,7 +101,7 @@
   height: 100vh;
   width: 100%;
   cursor: pointer;
-  background: linear-gradient(to bottom, #466c95, #7a90b0);
+  background: linear-gradient(to bottom, #466c95, #ACCCD7);
   align-items: center;
   justify-content: center;
   flex-direction: column;
