@@ -61,16 +61,12 @@ export default function Experience(props) {
 
   return (
     <>
-      <group>
         <ShoeAnimation
-          animationType={animationType}
           openBoxAnim={props.openBoxAnim}
         />
         <BoxAnimation
-          animationType={animationType}
           openBoxAnim={props.openBoxAnim}
         />
-      </group>
       {/* <NikeBox openBoxAnim={props.openBoxAnim}/> */}
       <OrbitControls
         ref={controlsRef}
@@ -80,7 +76,7 @@ export default function Experience(props) {
         minDistance={1.3} // Set the minimum distance for zoom
         maxDistance={1.3} // Set the maximum distance for zoom
       />
-      <axesHelper />
+      {/* <axesHelper /> */}
       <ambientLight intensity={1} />
       <pointLight intensity={1} position={[0, 5, 0]} />
       <directionalLight intensity={4} position={[10, 2, 0]} />
@@ -91,7 +87,7 @@ export default function Experience(props) {
         fov={fovRef.current}
         near={0.1}
         far={1000}
-        position={[-4, 1, 4]}
+        position={[4, 3, 4]}
       />
     </>
   );
