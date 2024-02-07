@@ -7,9 +7,9 @@ import FloatingLogos from "./3d-components/floating-logos";
 export default function Header() {
   return (
     <div className={styles["header"]}>
-      <Canvas className={styles["header-canvas"]}>
+      {/* <Canvas className={styles["header-canvas"]}>
         <FloatingLogos />
-      </Canvas>
+      </Canvas> */}
       <div className={styles["header-text"]}>
         <h1>NOCTA Air Force 1</h1>
         <img

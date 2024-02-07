@@ -8,17 +8,15 @@ export default function ShoeAnimation(props) {
   const meshRef = useRef();
   const shoeLeftRef = useRef();
   const shoeRightRef = useRef();
-  
-  const shoeLeft = useGLTF("./model/shoe/shoe-animation-left.glb");
-  const shoeRight = useGLTF("./model/shoe/shoe-animation-right.glb");
-  
+
+  const shoeLeft = useGLTF("./model/shoe/nike-noctashoeleft-animation.glb");
+  const shoeRight = useGLTF("./model/shoe/nike-noctashoeright-animation.glb");
+
   const shoeLeftAnimations = useAnimations(shoeLeft.animations, shoeLeft.scene);
-  const shoeRightAnimations = useAnimations(shoeRight.animations, shoeRight.scene);
-
-  console.log(shoeLeftAnimations);
-
-  console.log(shoeLeft);
-  console.log(shoeRight);
+  const shoeRightAnimations = useAnimations(
+    shoeRight.animations,
+    shoeRight.scene
+  );
 
   const lacesTextures = useTexture("./textures/LacesBaked001.jpg");
   const bodyTextures = useTexture("./textures/ShoesBaked004.jpg");
@@ -28,21 +26,79 @@ export default function ShoeAnimation(props) {
   lacesTextures.flipY = false;
   interorTextures.flipY = false;
 
+  // console.log(shoeLeftActions);
+  // console.log(shoeRightActions);
+
+  // useEffect(() => {
+  //   const shoeLeftActions = shoeLeftAnimations.actions;
+  //   const shoeRightActions = shoeRightAnimations.actions;
+
+  //   if (props.animationType === "ClosedIdle") {
+  //     shoeLeftActions.ClosedLeftIdle.reset().play();
+  //     shoeRightActions.ClosedRightIdle.reset().play();
+  //     console.log("Closed");
+  //   } else if (props.animationType === "Opening") {
+  //     shoeLeftActions.OpenLeft.reset().play().setLoop(THREE.LoopOnce);
+  //     shoeRightActions.OpenRight.reset().play().setLoop(THREE.LoopOnce);
+  //     console.log("Opening");
+  //   } else if (props.animationType === "OpenIdle") {
+  //     shoeLeftActions.IdleLeft.reset().play();
+  //     shoeRightActions.IdleRight.reset().play();
+  //     console.log("OpenIdle");
+  //   } else if (props.animationType === "Closing") {
+  //     shoeLeftActions.CloseLeft.reset().play().setLoop(THREE.LoopOnce);
+  //     shoeRightActions.CloseRight.reset().play().setLoop(THREE.LoopOnce);
+  //     console.log("Closing");
+  //   }
+  //   return () => {
+  //     // Clean up the rest of the animations
+  //     shoeLeftActions.ClosedLeftIdle.fadeOut(0);
+  //     shoeRightActions.ClosedRightIdle.fadeOut(0);
+  //     shoeLeftActions.OpenLeft.fadeOut(0);
+  //     shoeRightActions.OpenRight.fadeOut(0);
+  //     shoeLeftActions.IdleLeft.fadeOut(0);
+  //     shoeRightActions.IdleRight.fadeOut(0);
+  //     shoeLeftActions.CloseLeft.fadeOut(0);
+  //     shoeRightActions.CloseRight.fadeOut(0);
+  //   };
+  // }, [props.animationType]);
 
   useEffect(() => {
     const shoeLeftActions = shoeLeftAnimations.actions;
     const shoeRightActions = shoeRightAnimations.actions;
-    
-    shoeLeftActions.ShoeLeftAnim.play();
-    // shoeLeftActions.IdleLeft.play();
-    shoeRightActions.ShoeRightAnim.play();
-    // shoeRightActions.IdleRight.play();
 
-    
-    shoeLeftAnimations.actions.IdleLeft.play();
-    shoeLeftAnimations.actions.IdleLeft.crossFadeFrom(shoeLeftAnimations.actions.ShoeLeftAnim, 1);
+    if (props.openBoxAnim === true) {
 
-  },[])
+      shoeLeftActions.OpenLeft.reset().play().setLoop(THREE.LoopOnce);
+      shoeRightActions.OpenRight.reset().play().setLoop(THREE.LoopOnce);
+      setTimeout(() => {
+        shoeLeftActions.IdleLeft.reset().play();
+        shoeRightActions.IdleRight.reset().play();
+        console.log("Opening");
+      }, 5000);
+    } else if (props.openBoxAnim === false) {
+  
+      shoeLeftActions.CloseLeft.reset().play().setLoop(THREE.LoopOnce);
+      shoeRightActions.CloseRight.reset().play().setLoop(THREE.LoopOnce);
+      setTimeout(() => {
+        shoeLeftActions.ClosedLeftIdle.reset().play();
+        shoeRightActions.ClosedRightIdle.reset().play();
+        console.log("Closing");
+      }, 5000);
+    }
+    return () => {
+      // Clean up the rest of the animations
+      console.log("CLEANUP")
+      shoeLeftActions.ClosedLeftIdle.fadeOut(0);
+      shoeRightActions.ClosedRightIdle.fadeOut(0);
+      shoeLeftActions.OpenLeft.fadeOut(0);
+      shoeRightActions.OpenRight.fadeOut(0);
+      shoeLeftActions.IdleLeft.fadeOut(0);
+      shoeRightActions.IdleRight.fadeOut(0);
+      shoeLeftActions.CloseLeft.fadeOut(0);
+      shoeRightActions.CloseRight.fadeOut(0);
+    };
+  }, [props.openBoxAnim]);
 
   const textureScale = 5;
   shoeRight.scene.traverse((node) => {
@@ -55,7 +111,6 @@ export default function ShoeAnimation(props) {
       const metalnessMap = node.material.metalnessMap;
       const roughnessMap = node.material.roughnessMap;
       const normalMap = node.material.normalMap;
-      node.material.wireframe = props.isWireFrame;
 
       if (regularMap) {
         regularMap.repeat.set(textureScale, textureScale);
@@ -88,7 +143,6 @@ export default function ShoeAnimation(props) {
       // Apply a different material to each child
       node.material = new THREE.MeshStandardMaterial({
         map: lacesTextures,
-        wireframe: props.isWireFrame,
       });
     } else if (
       node.isMesh &&
@@ -100,7 +154,6 @@ export default function ShoeAnimation(props) {
         color: "white", // Adjust color as needed
         metalness: "0.5",
         roughness: "0.2",
-        wireframe: props.isWireFrame,
 
         // wireframe: true
       });
@@ -115,7 +168,6 @@ export default function ShoeAnimation(props) {
         color: "white", // Adjust color as needed
         metalness: "0.8",
         roughness: "0.2",
-        wireframe: props.isWireFrame,
 
         // wireframe: true
       });
@@ -127,13 +179,8 @@ export default function ShoeAnimation(props) {
 
       node.material = new THREE.MeshStandardMaterial({
         map: interorTextures,
-        wireframe: props.isWireFrame,
         // wireframe: true
       });
-    } else {
-      if (node.isMesh) {
-        node.material.wireframe = props.isWireFrame;
-      }
     }
   });
 
@@ -147,7 +194,6 @@ export default function ShoeAnimation(props) {
       const metalnessMap = node.material.metalnessMap;
       const roughnessMap = node.material.roughnessMap;
       const normalMap = node.material.normalMap;
-      node.material.wireframe = props.isWireFrame;
 
       if (regularMap) {
         regularMap.repeat.set(textureScale, textureScale);
@@ -180,7 +226,6 @@ export default function ShoeAnimation(props) {
       // Apply a different material to each child
       node.material = new THREE.MeshStandardMaterial({
         map: lacesTextures,
-        wireframe: props.isWireFrame,
       });
     } else if (
       node.isMesh &&
@@ -192,7 +237,6 @@ export default function ShoeAnimation(props) {
         color: "white", // Adjust color as needed
         metalness: "0.5",
         roughness: "0.2",
-        wireframe: props.isWireFrame,
 
         // wireframe: true
       });
@@ -207,7 +251,6 @@ export default function ShoeAnimation(props) {
         color: "white", // Adjust color as needed
         metalness: "0.8",
         roughness: "0.2",
-        wireframe: props.isWireFrame,
 
         // wireframe: true
       });
@@ -219,16 +262,10 @@ export default function ShoeAnimation(props) {
 
       node.material = new THREE.MeshStandardMaterial({
         map: interorTextures,
-        wireframe: props.isWireFrame,
         // wireframe: true
       });
-    } else {
-      if (node.isMesh) {
-        node.material.wireframe = props.isWireFrame;
-      }
     }
   });
-
 
   return (
     <>
