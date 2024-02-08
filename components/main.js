@@ -17,12 +17,16 @@ import ShoesSection from "./shoes-section";
 
 export default function main() {
   return (
-    <>
+    <div className={styles["container"]}>
       {/* <Header /> */}
-      <ShoesSection/>
-      {/* <About />
-      <BookSection/>
-      <Heritage /> */}
-    </>
+      <div className={styles["section"]}>
+        <ShoesSection />
+      </div>
+      {/* <About /> */}
+      {/* <div className={styles["section"]}>
+      <BookSection />
+      </div> */}
+      {/* <Heritage /> */}
+    </div>
   );
 }

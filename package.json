@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/joy": "^5.0.0-beta.26",
     "@react-three/drei": "^9.93.0",
     "gsap": "^3.12.5",
     "next": "14.0.4",
