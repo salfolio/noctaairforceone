@@ -48,14 +48,25 @@ export default function BoxAnimation(props) {
 //     };
 //   }, [props.animationType]);
 
+const boxActions = boxAnimations.actions;
+
   useEffect(() => {
     const boxActions = boxAnimations.actions;
     console.log(boxActions);
 
     if (props.openBoxAnim === true) {
-      console.log("openbox")
-      boxActions.IdleBox.reset().play();
-      boxActions.IdleBox.crossFadeFrom(boxActions.ClosedBoxIdle, 3);
+      console.log("openbox");
+      // Play the opening animation
+      const openAnimation = boxActions.OpenBox.reset().play().setLoop(THREE.LoopOnce);
+  
+      // Set an event listener for when the animation finishes
+      openAnimation.clampWhenFinished = true; // Ensure animation stops at the last frame
+      openAnimation.loop = THREE.LoopOnce; // Ensure it only plays once
+      openAnimation.onFinish = () => {
+        // Once the animation is finished, hide the box
+        box.scene.visible = false; // This hides the box
+      };
+
     } else if (props.openBoxAnim === false) {
       console.log("closeBox")
       boxActions.CloseBox.reset().play().setLoop(THREE.LoopOnce);
@@ -67,9 +78,10 @@ export default function BoxAnimation(props) {
       boxActions.CloseBox.fadeOut(0);
       boxActions.ClosedBoxIdle.fadeOut(0);
       boxActions.IdleBox.fadeOut(0);
+      box.scene.visible = true; // Ensure the box is visible when the component unmounts or props change
 
     };
-  }, [props.openBoxAnim]);
+  }, [props.openBoxAnim, boxActions, box.scene]);
 
   return (
     <>

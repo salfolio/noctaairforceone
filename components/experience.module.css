@@ -9,7 +9,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -200%);
   font-size: 3rem;
   text-align: center;
 }
@@ -17,7 +17,6 @@
 .header-text h1{
   width: 900px;
 }
-
 
 .header-subtext {
   position: absolute;
@@ -105,6 +104,28 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.open-box-button{
+  background-color:rgb(113, 113, 113);
+  padding: 0.5rem;
+  border-radius: 200rem;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  opacity: 0.5;
+  
+}
+
+.open-box-button:hover{
+  background-color:rgb(66, 66, 66);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  width: 100px;
+  height: 50px;
+  opacity: 0.5;
+  transition: 0.5;
 }
 
 /*--- END ABOUT SECTION ---*/

@@ -68,7 +68,6 @@ export default function ShoeAnimation(props) {
     const shoeRightActions = shoeRightAnimations.actions;
 
     if (props.openBoxAnim === true) {
-
       shoeLeftActions.OpenLeft.reset().play().setLoop(THREE.LoopOnce);
       shoeRightActions.OpenRight.reset().play().setLoop(THREE.LoopOnce);
       setTimeout(() => {
@@ -77,7 +76,6 @@ export default function ShoeAnimation(props) {
         console.log("Opening");
       }, 5000);
     } else if (props.openBoxAnim === false) {
-  
       shoeLeftActions.CloseLeft.reset().play().setLoop(THREE.LoopOnce);
       shoeRightActions.CloseRight.reset().play().setLoop(THREE.LoopOnce);
       setTimeout(() => {
@@ -88,7 +86,7 @@ export default function ShoeAnimation(props) {
     }
     return () => {
       // Clean up the rest of the animations
-      console.log("CLEANUP")
+      console.log("CLEANUP");
       shoeLeftActions.ClosedLeftIdle.fadeOut(0);
       shoeRightActions.ClosedRightIdle.fadeOut(0);
       shoeLeftActions.OpenLeft.fadeOut(0);
@@ -270,9 +268,9 @@ export default function ShoeAnimation(props) {
   return (
     <>
       <group ref={meshRef} scale={[1, 1, 1]}>
-        <group ref={shoeLeftRef}>
-          <primitive object={shoeLeft.scene} />
-        </group>
+          <group ref={shoeLeftRef}>
+            <primitive object={shoeLeft.scene} />
+          </group>
         <group ref={shoeRightRef}>
           <primitive object={shoeRight.scene} />
         </group>

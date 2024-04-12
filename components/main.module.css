@@ -6,3 +6,93 @@
     height: 100vh;
     scroll-snap-align: start;
 }
+
+.nav-bar{
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 285px;
+    z-index: 1000;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 25rem;
+}
+
+.nav-bar-options{
+    display: flex;
+    padding: 0.25rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    align-items: center;
+    color: #9c9c9c;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.option:hover{
+    color: #7db0c3;
+}
+
+.option{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+}
+
+
+.option-active {
+    background-color: #B2CDD7; /* Adjust the background color as needed */
+    color: #ffffff; /* Change text color for better contrast if needed */
+    border-radius: 25px; /* Apply a border radius for rounded corners */
+    padding: 10px; /* Add some padding inside the active tab */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Optional: add a subtle shadow for depth */
+}
+
+.section-left-container{
+    position: absolute;
+    padding: 0.5rem;
+    top: 1rem;
+    left: 1rem;
+    width: 350px;
+    font-size: 0.75rem;
+    z-index: 1000;
+}
+
+.section-title{
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.section-title h1{
+    font-weight: 700;
+}
+
+.section-description p{
+    margin-bottom: 1rem;
+}
+
+.purchase-button button{
+    padding: 1rem 3rem 1rem 3rem;
+    background-color: #7db0c3;
+    text-align: center;
+    background-color: none;
+    cursor: pointer;
+    border: none;
+}
+
+.purchase-button button:hover{
+ background-color: #72a3b4;
+}
+
+.product-info{
+    margin-bottom: 1rem;
+}
+
+.history-table{
+    display: flex;
+    font-family: "Roboto mono";
+    justify-content: space-between;
+    font-size: 1rem;
+    font-weight: 600;
+}

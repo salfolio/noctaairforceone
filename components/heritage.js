@@ -17,14 +17,6 @@ export default function Heritage() {
 
   return (
     <div className={styles["heritage-container"]} style={{...gridPatternStyle }}>
-      <div className={styles["heritage-header-section"]}>
-        <h1>{"heritage"}</h1>
-        <p>
-          {
-            "Introducd in 1982, the Air Force 1 redefined basketball footwear from the hardwood to the tarmac. It was the first basketball sneaker to house Nike Air, but it's innovative nature has since taken a back seat to its status as a street icon"
-          }
-        </p>
-      </div>
       <Canvas>
         <OrbitControls enablePan={false} enableZoom={false} />
         <directionalLight intensity={1} />

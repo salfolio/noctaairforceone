@@ -8,6 +8,8 @@ import { useFrame } from "react-three-fiber";
 import * as THREE from "three"; // Import THREE
 import { gsap } from "gsap";
 import BoxAnimation from "./box-animation";
+import { Html } from "@react-three/drei";
+import styles from "../experience.module.css";
 
 export default function Experience(props) {
   const [cameraTransformation, setCameraTransformation] = useState({
@@ -61,12 +63,11 @@ export default function Experience(props) {
 
   return (
     <>
-        <ShoeAnimation
-          openBoxAnim={props.openBoxAnim}
-        />
-        <BoxAnimation
-          openBoxAnim={props.openBoxAnim}
-        />
+      <Html position={[0.09, 0.124, -0.15]}>
+        <div className={styles["open-box-button"]}>{/* <p>Open Box</p> */}</div>
+      </Html>
+      <ShoeAnimation openBoxAnim={props.openBoxAnim} />
+      <BoxAnimation openBoxAnim={props.openBoxAnim} />
       {/* <NikeBox openBoxAnim={props.openBoxAnim}/> */}
       <OrbitControls
         ref={controlsRef}

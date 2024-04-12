@@ -7,7 +7,7 @@ import { useState } from "react";
 import { PerspectiveCamera } from "@react-three/drei";
 
 export default function Book() {
-  const book = useGLTF("./model/book/book.glb");
+  const book = useGLTF("./model/book/book-02.glb");
 
   const bookRef = useRef();
 

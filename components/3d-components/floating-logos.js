@@ -7,7 +7,7 @@ import { useState } from "react";
 import { PerspectiveCamera } from "@react-three/drei";
 
 export default function FloatingLogos() {
-  const heartLogo = useGLTF("./model/logos/heartlogo.glb");
+  const heartLogo = useGLTF("./model/logos/nikelogo02.glb");
   const noctaLogo = useGLTF("./model/logos/nikelogo02.glb");
 
   const heartRef = useRef();
@@ -80,7 +80,7 @@ export default function FloatingLogos() {
         position={[0, 0, 4]}
       />
       <ambientLight intensity={3} />
-      <group ref={groupRef}>
+      {/* <group ref={groupRef}>
         {heartPositions.map((heart, index) => (
           <group
             key={index}
@@ -94,7 +94,7 @@ export default function FloatingLogos() {
             />
           </group>
         ))}
-      </group>
+      </group> */}
     </>
   );
 }

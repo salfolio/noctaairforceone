@@ -23,8 +23,6 @@ export default function ShoesSection() {
       <div className={styles["toggle-box-button"]}>
         <div className={styles["toggle-box-button-container"]}>
           <div onClick={toggleAnim}>{"open box"}</div>
-          <div onClick={toggleAnim}>{"close box"}</div>
-       
         </div>
       </div>
     </div>
