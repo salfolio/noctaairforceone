@@ -107,25 +107,36 @@
 }
 
 .open-box-button{
-  background-color:rgb(113, 113, 113);
+  background-color:rgb(255, 162, 0);
   padding: 0.5rem;
   border-radius: 200rem;
   text-align: center;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   opacity: 0.5;
-  
+  transition: 0.3s;
+
 }
 
 .open-box-button:hover{
-  background-color:rgb(66, 66, 66);
+  background-color:rgb(255, 162, 0);
   padding: 0.5rem;
   border-radius: 1rem;
   text-align: center;
   width: 100px;
-  height: 50px;
   opacity: 0.5;
-  transition: 0.5;
+}
+
+.open-box-button p {
+  visibility: hidden; /* Start with the p tag hidden */
+  opacity: 0;
+  transition: visibility 0s linear 0.3s, opacity 0.3s linear; /* Apply transition with delay */
+}
+
+.open-box-button:hover p {
+  visibility: visible; /* Make p tag visible on hover */
+  opacity: 1; /* Fade in the p tag */
+  transition-delay: 0.2s; /* Delay the transition */
 }
 
 /*--- END ABOUT SECTION ---*/

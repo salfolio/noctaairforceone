@@ -18,13 +18,13 @@ export default function ShoesSection() {
   return (
     <div className={styles["canvas"]}>
       <Canvas>
-        <Experience openBoxAnim={openBoxAnim} />
+        <Experience openBoxAnim={openBoxAnim} toggleAnim={toggleAnim} />
       </Canvas>
-      <div className={styles["toggle-box-button"]}>
+      {/* <div className={styles["toggle-box-button"]}>
         <div className={styles["toggle-box-button-container"]}>
           <div onClick={toggleAnim}>{"open box"}</div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

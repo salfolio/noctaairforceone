@@ -17,6 +17,9 @@ export default function Experience(props) {
     fov: 25,
   });
 
+  const [toggleButtonStateOpen, setToggleButtonStateOpen] = useState(true);
+  const [toggleButtonStateClose, setToggleButtonStateClose] = useState(false);
+
   const fovRef = useRef(cameraTransformation.fov);
   const targetRef = useRef(cameraTransformation.target);
 
@@ -61,11 +64,53 @@ export default function Experience(props) {
     });
   });
 
+  const toggleAnimationHandler = () => {
+    props.toggleAnim();
+  
+    if (toggleButtonStateClose === false && toggleButtonStateOpen === true) {
+      // Immediately set the toggleButtonStateOpen to false
+      setToggleButtonStateOpen(false);
+  
+      // Delay setting toggleButtonStateClose to true by 4 seconds
+      setTimeout(() => {
+        setToggleButtonStateClose(true);
+      }, 5200); // Corrected to 4000 milliseconds for 4 seconds
+    }
+    else if (toggleButtonStateOpen === false && toggleButtonStateClose === true) {
+      // Immediately set toggleButtonStateClose to false
+      setToggleButtonStateClose(false);
+  
+      // Delay setting toggleButtonStateOpen to true by 4 seconds
+      setTimeout(() => {
+        setToggleButtonStateOpen(true);
+      }, 5200); // Consistent delay of 4 seconds
+    }
+  };
+
   return (
     <>
-      <Html position={[0.09, 0.124, -0.15]}>
-        <div className={styles["open-box-button"]}>{/* <p>Open Box</p> */}</div>
-      </Html>
+      {toggleButtonStateOpen && (
+        <Html position={[0.09, 0.124, -0.15]}>
+          <div
+            className={styles["open-box-button"]}
+            onClick={toggleAnimationHandler}
+          >
+            <p>Open Box</p>
+          </div>
+        </Html>
+      )}
+
+      {toggleButtonStateClose && (
+        <Html position={[0.07, 0.55, -0.14]}>
+          <div
+            className={styles["open-box-button"]}
+            onClick={toggleAnimationHandler}
+          >
+            <p>Close</p>
+          </div>
+        </Html>
+      )}
+
       <ShoeAnimation openBoxAnim={props.openBoxAnim} />
       <BoxAnimation openBoxAnim={props.openBoxAnim} />
       {/* <NikeBox openBoxAnim={props.openBoxAnim}/> */}
