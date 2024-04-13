@@ -1,6 +1,15 @@
 .section {
     height: 100vh;
     scroll-snap-align: start;
+
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Chrome/Safari/Opera */
+    user-select: none;
+    /* Non-prefixed version, currently supported by most modern browsers */
+
+
 }
 
 .nav-bar {
@@ -64,15 +73,16 @@
     width: 350px;
     font-size: 0.75rem;
     z-index: 1000;
-    pointer-events: none;  /* Disable mouse events like clicking and hovering */
+    pointer-events: none;
+    /* Disable mouse events like clicking and hovering */
 
-    
+
 }
 
 .section-title {
     font-size: 1rem;
     margin-bottom: 1rem;
-    
+
 }
 
 .section-title h1 {
@@ -81,7 +91,7 @@
 
 .section-description p {
     margin-bottom: 1rem;
-    
+
 }
 
 .purchase-button button {
@@ -91,7 +101,8 @@
     background-color: none;
     cursor: pointer;
     border: none;
-    pointer-events: auto;  /* Disable mouse events like clicking and hovering */
+    pointer-events: auto;
+    /* Disable mouse events like clicking and hovering */
 
 }
 

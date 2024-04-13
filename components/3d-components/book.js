@@ -20,7 +20,10 @@ export default function Book() {
         // Assuming 768px is your mobile breakpoint
         setMinZoom(7.6); // Closer zoom for mobile
         setMaxZoom(7.6); // Farther zoom out for mobile
-      } else if (window.innerWidth >= 1600) {
+      } else if (window.innerWidth <= 700){
+        setMinZoom(9); // Default closer zoom limit for desktop
+        setMaxZoom(9); // Default farther zoom limit for desktop
+      }else if (window.innerWidth >= 1600) {
         setMinZoom(4.9); // Default closer zoom limit for desktop
         setMaxZoom(4.9); // Default farther zoom limit for desktop
       } else {

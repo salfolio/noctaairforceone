@@ -22,6 +22,9 @@ export default function Heritage() {
       } else if (window.innerWidth >= 1600) {
         setMinZoom(4.3); // Default closer zoom limit for desktop
         setMaxZoom(4.3); // Default farther zoom limit for desktop
+      } else if (window.innerWidth <= 700){
+        setMinZoom(9.2); // Default closer zoom limit for desktop
+        setMaxZoom(9.2); // Default farther zoom limit for desktop
       } else {
         setMinZoom(5); // Default closer zoom limit for desktop
         setMaxZoom(5); // Default farther zoom limit for desktop
