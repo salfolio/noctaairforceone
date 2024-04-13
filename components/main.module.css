@@ -1,13 +1,9 @@
-.container {
-    scroll-snap-type: y proximity;
-}
-
 .section {
     height: 100vh;
     scroll-snap-align: start;
 }
 
-.nav-bar{
+.nav-bar {
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
@@ -16,9 +12,12 @@
     background-color: rgb(255, 255, 255);
     cursor: pointer;
     border-radius: 25rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Optional: add a subtle shadow for depth */
+
 }
 
-.nav-bar-options{
+.nav-bar-options {
     display: flex;
     padding: 0.25rem;
     padding-left: 0.5rem;
@@ -29,11 +28,11 @@
     font-size: 0.75rem;
 }
 
-.option:hover{
+.option:hover {
     color: #7db0c3;
 }
 
-.option{
+.option {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,14 +41,22 @@
 
 
 .option-active {
-    background-color: #B2CDD7; /* Adjust the background color as needed */
-    color: #ffffff; /* Change text color for better contrast if needed */
-    border-radius: 25px; /* Apply a border radius for rounded corners */
-    padding: 10px; /* Add some padding inside the active tab */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Optional: add a subtle shadow for depth */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    background-color: #B2CDD7;
+    /* Adjust the background color as needed */
+    color: #ffffff;
+    /* Change text color for better contrast if needed */
+    border-radius: 25px;
+    /* Apply a border radius for rounded corners */
+    padding: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Optional: add a subtle shadow for depth */
 }
 
-.section-left-container{
+.section-left-container {
     position: absolute;
     padding: 0.5rem;
     top: 1rem;
@@ -57,42 +64,103 @@
     width: 350px;
     font-size: 0.75rem;
     z-index: 1000;
+    pointer-events: none;  /* Disable mouse events like clicking and hovering */
+
+    
 }
 
-.section-title{
+.section-title {
     font-size: 1rem;
     margin-bottom: 1rem;
+    
 }
 
-.section-title h1{
+.section-title h1 {
     font-weight: 700;
 }
 
-.section-description p{
+.section-description p {
     margin-bottom: 1rem;
+    
 }
 
-.purchase-button button{
+.purchase-button button {
     padding: 1rem 3rem 1rem 3rem;
     background-color: #7db0c3;
     text-align: center;
     background-color: none;
     cursor: pointer;
     border: none;
+    pointer-events: auto;  /* Disable mouse events like clicking and hovering */
+
 }
 
-.purchase-button button:hover{
- background-color: #72a3b4;
+.purchase-button button:hover {
+    background-color: #72a3b4;
 }
 
-.product-info{
+.product-info {
     margin-bottom: 1rem;
 }
 
-.history-table{
+.history-table {
     display: flex;
     font-family: "Roboto mono";
     justify-content: space-between;
     font-size: 1rem;
     font-weight: 600;
+}
+
+
+/* Media Queries for Mobile Devices */
+@media (max-width: 768px) {
+    .nav-bar {
+        position: absolute;
+        /* or 'absolute' if it should move with the page */
+        bottom: 2rem;
+        top: auto;
+        left: 50%;
+        /* set left to 50% to start the element at the middle of the screen */
+        width: 80%;
+        /* Full width for smaller screens */
+        border-radius: 20rem;
+        /* Slightly less rounded */
+        transform: translateX(-50%);
+        /* shift it back by half of its width to truly center it */
+    }
+
+    .nav-bar-options {
+        justify-content: space-around;
+        /* Ensure options spread out */
+        font-size: 0.65rem;
+        /* Smaller font size */
+    }
+
+    .section-left-container {
+        top: 0.25rem;
+        left: 0.25rem;
+        width: 100%;
+        /* Full width to use space effectively */
+        font-size: 0.75rem;
+        /* Smaller font size for better readability */
+        padding: 0.75rem;
+
+    }
+
+    .section-title,
+    .section-description p,
+    .product-info,
+    .history-table {
+        font-size: 0.75rem;
+        /* Uniform smaller font size for all text elements */
+    }
+
+    .purchase-button button {
+        padding: 0.75rem 1.5rem;
+        /* Smaller padding for smaller buttons */
+    }
+
+    .history-table {
+        padding-right: 0.5rem;
+    }
 }

@@ -20,6 +20,37 @@ export default function Experience(props) {
   const [toggleButtonStateOpen, setToggleButtonStateOpen] = useState(true);
   const [toggleButtonStateClose, setToggleButtonStateClose] = useState(false);
 
+  const [minSize, setMinZoom] = useState(1.3);
+  const [maxSize, setMaxZoom] = useState(1.3);
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth <= 768) { // Assuming 768px is your mobile breakpoint
+        setMinZoom(1.7); // Closer zoom for mobile
+        setMaxZoom(1.7); // Farther zoom out for mobile
+      } else if(window.innerWidth >= 1600){
+        setMinZoom(1.15); // Default closer zoom limit for desktop
+        setMaxZoom(1.15); // Default farther zoom limit for desktop
+      }
+      else{
+        setMinZoom(1.3); // Default closer zoom limit for desktop
+        setMaxZoom(1.3); // Default farther zoom limit for desktop
+      }
+    }
+
+    // Set zoom distances initially
+    handleResize();
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Clean up function to remove event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
   const fovRef = useRef(cameraTransformation.fov);
   const targetRef = useRef(cameraTransformation.target);
 
@@ -119,8 +150,8 @@ export default function Experience(props) {
         enablePan={false}
         enableZoom={false}
         target={targetRef.current}
-        minDistance={1.3} // Set the minimum distance for zoom
-        maxDistance={1.3} // Set the maximum distance for zoom
+        minDistance={minSize} // Set the minimum distance for zoom
+        maxDistance={maxSize} // Set the maximum distance for zoom
       />
       {/* <axesHelper /> */}
       <ambientLight intensity={1} />
