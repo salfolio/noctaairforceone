@@ -26,8 +26,8 @@ export default function Experience(props) {
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth <= 768) { // Assuming 768px is your mobile breakpoint
-        setMinZoom(1.7); // Closer zoom for mobile
-        setMaxZoom(1.7); // Farther zoom out for mobile
+        setMinZoom(2); // Closer zoom for mobile
+        setMaxZoom(2); // Farther zoom out for mobile
       }else if (window.innerWidth <= 700){
         setMinZoom(2); // Default closer zoom limit for desktop
         setMaxZoom(2); // Default farther zoom limit for desktop

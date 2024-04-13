@@ -17,8 +17,8 @@ export default function Heritage() {
     function handleResize() {
       if (window.innerWidth <= 768) {
         // Assuming 768px is your mobile breakpoint
-        setMinZoom(8); // Closer zoom for mobile
-        setMaxZoom(8); // Farther zoom out for mobile
+        setMinZoom(9.2); // Closer zoom for mobile
+        setMaxZoom(9.2); // Farther zoom out for mobile
       } else if (window.innerWidth >= 1600) {
         setMinZoom(4.3); // Default closer zoom limit for desktop
         setMaxZoom(4.3); // Default farther zoom limit for desktop
