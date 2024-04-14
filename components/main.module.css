@@ -17,13 +17,13 @@
     top: 1.5rem;
     right: 1.5rem;
     width: 285px;
-    z-index: 1000;
+    z-index: 1;
     background-color: rgb(255, 255, 255);
-    cursor: pointer;
+    cursor: none;
     border-radius: 25rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     /* Optional: add a subtle shadow for depth */
-
+    font-weight: 600;
 }
 
 .nav-bar-options {
@@ -66,13 +66,14 @@
 }
 
 .section-left-container {
+
     position: absolute;
     padding: 0.5rem;
     top: 1rem;
     left: 1rem;
     width: 350px;
     font-size: 0.75rem;
-    z-index: 1000;
+    z-index: 1;
     pointer-events: none;
     /* Disable mouse events like clicking and hovering */
 
@@ -99,7 +100,7 @@
     background-color: #7db0c3;
     text-align: center;
     background-color: none;
-    cursor: pointer;
+    cursor: none;
     border: none;
     pointer-events: auto;
     /* Disable mouse events like clicking and hovering */
@@ -145,6 +146,7 @@
         /* Ensure options spread out */
         font-size: 0.65rem;
         /* Smaller font size */
+
     }
 
     .section-left-container {

@@ -32,7 +32,7 @@
   /* position: fixed; */
   height: 100vh;
   width: 100%;
-  cursor: pointer;
+  cursor: none;
   background-color: rgb(221, 221, 221);
   /* background-color: #ACCCD7; */
   background: linear-gradient(to bottom, #ACCCD7, #d3d3d3);
@@ -52,7 +52,7 @@
 
 .toggle-box-button-container{
   background-color: red;
-  cursor: pointer;
+  cursor: none;
   
 }
 
@@ -65,7 +65,7 @@
   /* Text color */
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: none;
 }
 
 /* Optional: Add hover effect */
@@ -78,7 +78,7 @@
   display: flex;
   height: 100vh;
   width: 100%;
-  cursor: pointer;
+  cursor: none;
   /* background: linear-gradient(to bottom, #d3d3d3, #ababab); */
   background-color: #466c95;
   align-items: center;
@@ -99,7 +99,7 @@
   display: flex;
   height: 100vh;
   width: 100%;
-  cursor: pointer;
+  cursor: none;
   background: linear-gradient(to bottom, #466c95, #ACCCD7);
   align-items: center;
   justify-content: center;
@@ -107,7 +107,7 @@
 }
 
 .open-box-button{
-  background-color:rgb(255, 162, 0);
+  background-color:rgb(132, 132, 132);
   padding: 0.5rem;
   border-radius: 200rem;
   text-align: center;
@@ -151,7 +151,7 @@
 
 .heritage-container {
   height: 100vh;
-  cursor: pointer;
+  cursor: none;
   background-color: black;
 }
 

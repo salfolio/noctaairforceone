@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Experience from "./3d-components/experience";
+import Cursor from "./cursor";
 import styles from "./main.module.css";
 import { Canvas } from "react-three-fiber";
 import {
@@ -19,11 +20,11 @@ import SidePannel from "./side-pannel";
 import SidePannelHeritage from "./side-pannel-heritage";
 import SidePannelInspo from "./side-pannel-inspo";
 
+
 export default function main() {
   const [tab, setTab] = useState("shoes");
   const [start, setStart] = useState(false);
 
-  const startExperienceHandler = () => {};
 
   const changeTabHandler = (option) => {
     setTab(option);
@@ -31,6 +32,7 @@ export default function main() {
 
   return (
     <div className={styles["container"]}>
+
       <div className={styles["nav-bar"]}>
         <div className={styles["nav-bar-options"]}>
           <div
